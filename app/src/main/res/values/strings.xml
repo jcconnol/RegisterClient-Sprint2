@@ -56,4 +56,9 @@
     <string name="intent_extra_product">intent_extra_product</string>
     <string name="title_activity_create_employee">CreateEmployeeActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="items_in_cart">Items in cart:</string>
+    <string name="shopping_cart_text">Shopping Cart</string>
+    <string name="saved_for_later_text">Saved for later</string>
+    <string name="internal_file_name">ShoppingListFile</string>
+    <integer name="number_of_items_in_cart">0</integer>
 </resources>

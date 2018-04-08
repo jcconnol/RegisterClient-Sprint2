@@ -1,5 +1,6 @@
 package edu.uark.uarkregisterapp;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -18,7 +19,6 @@ public class ShoppingCart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-
         try{
             File file = new File(getString(R.string.internal_file_name));
             FileInputStream fis = new FileInputStream(file);
@@ -29,7 +29,6 @@ public class ShoppingCart extends AppCompatActivity {
             String line = null;
             while ((line = br.readLine()) != null) {
                 //things read from file go into list on screen
-
 
             }
 

@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.uark.uarkregisterapp.ShoppingCart">
 
-
     <Button
         android:id="@+id/purchaseButton"
         android:layout_width="wrap_content"
@@ -28,7 +27,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="13dp"
         android:layout_toEndOf="@+id/purchaseButton"
-        android:text="@string/items_in_cart" />
+        android:text="@string/items_in_cart"
+        android:textAppearance="@android:style/TextAppearance.Holo.Widget" />
 
     <TextView
         android:id="@+id/number_in_cart"
@@ -46,15 +46,33 @@
         android:layout_below="@+id/number_in_cart"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="@string/shopping_cart_text" />
+        android:text="@string/shopping_cart_text"
+        android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+
+    <ListView
+        android:id="@+id/shopping_cart_list"
+        android:layout_below="@+id/ShoppingCartText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
 
     <TextView
+        android:id="@+id/save_for_later_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/shopping_cart_list"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="170dp"
-        android:text="@string/items_saved_for_later" />
+        android:text="@string/items_saved_for_later"
+        android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+
+    <ListView
+        android:id="@+id/saved_items_list"
+        android:layout_below="@+id/save_for_later_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+    </ListView>
 
     <TextView
         android:id="@+id/noItemsInCart"

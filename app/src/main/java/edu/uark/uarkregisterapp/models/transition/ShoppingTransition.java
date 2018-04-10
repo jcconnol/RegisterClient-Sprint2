@@ -14,7 +14,7 @@ public class ShoppingTransition implements Parcelable {
             cartProducts.addElement(productsVec[i]);
         }
     }
-    public Vector<Product> getProducts(){
+    public Vector<Product> getShopProducts(){
         return cartProducts;
     }
 
@@ -24,7 +24,7 @@ public class ShoppingTransition implements Parcelable {
             savedProducts.addElement(productsVec[i]);
         }
     }
-    public Vector<Product> getProducts(){
+    public Vector<Product> getSavedProducts(){
         return savedProducts;
     }
 
@@ -62,5 +62,4 @@ public class ShoppingTransition implements Parcelable {
         savedProducts.clear();
         cartProducts.clear();
     }
-
 }

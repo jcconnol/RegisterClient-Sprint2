@@ -1,6 +1,7 @@
 package edu.uark.uarkregisterapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,34 +10,32 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Vector;
+
+import edu.uark.uarkregisterapp.models.api.Product;
+import edu.uark.uarkregisterapp.models.transition.ShoppingTransition;
 
 public class ShoppingCart extends AppCompatActivity {
 
     Context fileContext;
+    Intent intent;
+    ShoppingTransition shoppingTransition;
+    Vector<Product> shoppingCartList;
+    Vector<Product> saveForLaterList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-        try{
-            File file = new File(getString(R.string.internal_file_name));
-            FileInputStream fis = new FileInputStream(file);
+        intent = getIntent();
+        shoppingTransition = intent.getParcelableExtra("ShoppingTransition");
+        shoppingCartList = shoppingTransition.getShopProducts();
+        saveForLaterList = shoppingTransition.getSavedProducts();
 
-            //Construct BufferedReader from InputStreamReader
-            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+        
 
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                //things read from file go into list on screen
-
-            }
-
-            br.close();
-            //
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 

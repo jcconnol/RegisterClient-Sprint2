@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
         this.getEmployeeWelcomeTextView().setText("Welcome " + this.employeeTransition.getFirstName() + " (" + this.employeeTransition.getEmployeeId() + ")!");
     }
 
+    public void shoppingCartOnClick(View view){
+        this.startActivity(new Intent(getApplicationContext(), ShoppingCart.class));
+    }
+
     public void beginTransactionButtonOnClick(View view) {
         this.displayFunctionalityNotAvailableDialog();
     }

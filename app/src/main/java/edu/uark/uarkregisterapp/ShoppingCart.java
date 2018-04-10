@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,10 +36,44 @@ public class ShoppingCart extends AppCompatActivity {
         shoppingCartList = shoppingTransition.getShopProducts();
         saveForLaterList = shoppingTransition.getSavedProducts();
 
-        
+        if(!shoppingCartList.isEmpty()){
+            TextView num_in_cart = (TextView)findViewById(R.id.number_in_cart);
+            num_in_cart.setText(String.valueOf(shoppingCartList.size()));
+
+            setCartEmptyHidden();
+
+
+
+        }
+
+        if(!saveForLaterList.isEmpty()){
+            setSaveForLaterEmptyHidden();
+
+
+
+        }
 
     }
 
+    private void setSaveForLaterEmptyHidden(){
+        TextView emptyCartText  = (TextView)findViewById(R.id.noItemsInCart);
+        emptyCartText.setVisibility(View.INVISIBLE);
+    }
+
+    private void setCartEmptyHidden(){
+        TextView emptyCartText  = (TextView)findViewById(R.id.noItemsInCart);
+        emptyCartText.setVisibility(View.INVISIBLE);
+    }
+
+    private void setSaveForLaterEmptyVisible(){
+        TextView emptyCartText  = (TextView)findViewById(R.id.noItemsInCart);
+        emptyCartText.setVisibility(View.VISIBLE);
+    }
+
+    private void setCartEmptyVisible(){
+        TextView emptyCartText  = (TextView)findViewById(R.id.noItemsInCart);
+        emptyCartText.setVisibility(View.VISIBLE);
+    }
 
 }
 

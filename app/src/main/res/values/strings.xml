@@ -61,4 +61,9 @@
     <string name="saved_for_later_text">Saved for later</string>
     <string name="internal_file_name">ShoppingListFile</string>
     <integer name="number_of_items_in_cart">0</integer>
+    <string name="to_shopping_cart">My Shopping Cart</string>
+    <string name="items_saved_for_later">Saved For Later</string>
+    <string name="no_items_in_cart">There are no items in our cart</string>
+    <string name="no_items_saved">There are no items saved</string>
+    <string name="purchase_button">Purchase</string>
 </resources>

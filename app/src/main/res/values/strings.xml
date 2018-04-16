@@ -66,4 +66,9 @@
     <string name="no_items_in_cart">There are no items in our cart</string>
     <string name="no_items_saved">There are no items saved</string>
     <string name="purchase_button">Purchase</string>
+    <string name="shop_text_view_products_count">count</string>
+    <string name="shop_text_view_products_lookup_code">lookup code</string>
+    <string name="quantity">QTY:</string>
+    <string name="save_for_later">Save For Later</string>
+    <string name="move_to_cart">Move To Cart</string>
 </resources>

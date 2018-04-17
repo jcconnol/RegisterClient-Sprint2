@@ -7,7 +7,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Vector;
 
@@ -35,7 +39,8 @@ public class ShoppingCart extends AppCompatActivity {
     ShoppingTransition shoppingTransition;
     List<Product> shoppingCartList;
     List<Product> saveForLaterList;
-
+    ArrayAdapter cartArrayAdapter;
+    ArrayAdapter savedArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,33 +52,69 @@ public class ShoppingCart extends AppCompatActivity {
         shoppingCartList = shoppingTransition.getShopProducts();
         saveForLaterList = shoppingTransition.getSavedProducts();
 
+        ListView cartListView = findViewById(R.id.shopping_cart_list);
+        ListView savedListView = findViewById(R.id.saved_items_list);
+
+        //TODO CHANGE TO SHOPPINGCARTLISTADAPTER
+        //cartArrayAdapter = new ArrayAdapter<Product>(this, R.id.shopping_cart_list, shoppingCartList);
+        //savedArrayAdapter = new ArrayAdapter<Product>(this, R.id.saved_items_list, saveForLaterList, savedArrayAdapter);
+
         if(!shoppingCartList.isEmpty()){
-            TextView num_in_cart = (TextView)findViewById(R.id.number_in_cart);
+            TextView num_in_cart = findViewById(R.id.number_in_cart);
+
             num_in_cart.setText(String.valueOf(shoppingCartList.size()));
 
             setCartEmptyHidden();
-
-
+            cartListView.setAdapter(cartArrayAdapter);
         }
 
         if(!saveForLaterList.isEmpty()){
+
             setSaveForLaterEmptyHidden();
 
-
+            savedListView.setAdapter(savedArrayAdapter);
         }
-
     }
 
     public void purchaseOnClick(){
+        super.onResume();
+        (new ShoppingCart.PurchaseProductTask()).execute();
+    }
+
+    public void deleteFromCart(Product elem){
+        shoppingCartList.remove(elem);
+        shoppingCartList.notify();
+    }
+
+    public void saveForLater(Product elem){
+        int found = cartArrayAdapter.getPosition(elem);
+        saveForLaterList.add(shoppingCartList.get(found));
+        saveForLaterList.notify();
+        shoppingCartList.notify();
+    }
+
+    public void moveToCart(Product elem){
+        int found = savedArrayAdapter.getPosition(elem);
+        shoppingCartList.add(saveForLaterList.get(found));
+        shoppingCartList.notify();
+        saveForLaterList.notify();
+    }
+
+    private void populateShoppingCartList(ListView listView, ArrayAdapter arrayAdapter) {
+       // ArrayAdapter<String> newArrayAdapter = new ArrayAdapter<String>(
+        //        this,
+        //        R.id.shopping_cart_list);
+
 
     }
 
-    public void deleteFromCart(){
+    private void populateSavedList(ListView listView, List<String> arrayAdapter, Layout layout) {
+        /*ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                layout,
+                arrayAdapter);*/
 
-    }
-
-    public void saveForLater(){
-
+        //listView.setAdapter(arrayAdapter);
     }
 
     private class PurchaseProductTask extends AsyncTask<Void, Void, ApiResponse<List<Product>>> {
@@ -90,8 +131,8 @@ public class ShoppingCart extends AppCompatActivity {
             ApiResponse<List<Product>> apiResponse = (new ProductService()).getProducts();
 
             if (apiResponse.isValidResponse()) {
-                products.clear();
-                products.addAll(apiResponse.getData());
+                shoppingCartList.clear();
+                shoppingCartList.addAll(apiResponse.getData());
             }
 
             return apiResponse;
@@ -100,7 +141,7 @@ public class ShoppingCart extends AppCompatActivity {
         @Override
         protected void onPostExecute(ApiResponse<List<Product>> apiResponse) {
             if (apiResponse.isValidResponse()) {
-                productListAdapter.notifyDataSetChanged();
+                cartArrayAdapter.notifyDataSetChanged();
             }
 
             this.purchaseProductAlert.dismiss();
@@ -147,8 +188,5 @@ public class ShoppingCart extends AppCompatActivity {
         TextView emptyCartText  = (TextView)findViewById(R.id.noItemsInCart);
         emptyCartText.setVisibility(View.VISIBLE);
     }
-
-    private List<Product> products;
-    private ProductListAdapter productListAdapter;
 }
 

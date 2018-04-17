@@ -27,6 +27,13 @@
             android:gravity="center_horizontal"
             android:layout_gravity="center"/>
 
+        <TextView
+            android:id="@+id/shopping_cart_item_qty"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/num_of_products"/>
+
     </LinearLayout>
 
     <LinearLayout

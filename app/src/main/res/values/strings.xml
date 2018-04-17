@@ -71,4 +71,5 @@
     <string name="quantity">QTY:</string>
     <string name="save_for_later">Save For Later</string>
     <string name="move_to_cart">Move To Cart</string>
+    <string name="num_of_products">1</string>
 </resources>

@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Vector;
 
 import edu.uark.uarkregisterapp.adapters.ProductListAdapter;
+import edu.uark.uarkregisterapp.adapters.SavedCartListAdapter;
+import edu.uark.uarkregisterapp.adapters.ShoppingCartListAdapter;
 import edu.uark.uarkregisterapp.models.api.ApiResponse;
 import edu.uark.uarkregisterapp.models.api.Employee;
 import edu.uark.uarkregisterapp.models.api.Product;
@@ -34,13 +36,12 @@ import edu.uark.uarkregisterapp.models.transition.ShoppingTransition;
 
 public class ShoppingCart extends AppCompatActivity {
 
-    Context fileContext;
     Intent intent;
     ShoppingTransition shoppingTransition;
     List<Product> shoppingCartList;
     List<Product> saveForLaterList;
-    ArrayAdapter cartArrayAdapter;
-    ArrayAdapter savedArrayAdapter;
+    ShoppingCartListAdapter cartArrayAdapter;
+    SavedCartListAdapter savedArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +56,8 @@ public class ShoppingCart extends AppCompatActivity {
         ListView cartListView = findViewById(R.id.shopping_cart_list);
         ListView savedListView = findViewById(R.id.saved_items_list);
 
-        //TODO CHANGE TO SHOPPINGCARTLISTADAPTER
-        //cartArrayAdapter = new ArrayAdapter<Product>(this, R.id.shopping_cart_list, shoppingCartList);
-        //savedArrayAdapter = new ArrayAdapter<Product>(this, R.id.saved_items_list, saveForLaterList, savedArrayAdapter);
+        cartArrayAdapter = new ShoppingCartListAdapter(this, this.shoppingCartList);
+        savedArrayAdapter = new SavedCartListAdapter(this, this.saveForLaterList);
 
         if(!shoppingCartList.isEmpty()){
             TextView num_in_cart = findViewById(R.id.number_in_cart);

@@ -30,7 +30,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="20"
@@ -40,14 +39,15 @@
             android:id="@+id/save_for_later_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:OnClick="SaveForLater"
+            android:onClick="saveForLater"
             android:layout_marginLeft="60dp"
             android:gravity="center_horizontal"
             android:text="@string/save_for_later" />
 
         <TextView
             android:id="@+id/delete_from_cart_button"
-            android:layout_marginLeft="50dp"
+            android:onClick="deleteFromCart"
+            android:layout_marginLeft="80dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"

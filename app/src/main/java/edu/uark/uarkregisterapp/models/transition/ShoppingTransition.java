@@ -3,28 +3,29 @@ package edu.uark.uarkregisterapp.models.transition;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
 import java.util.Vector;
 import edu.uark.uarkregisterapp.models.api.Product;
 
 public class ShoppingTransition implements Parcelable {
 
-    private Vector<Product> cartProducts;
-    public void setCartProducts(Vector<Product> productsVec){
-        for(int i = 0; i < productsVec.size(); i++){
-            cartProducts.addElement(productsVec[i]);
+    private List<Product> cartProducts;
+    public void setCartProducts(List<Product> productsList){
+        for(int i = 0; i < productsList.size(); i++){
+            cartProducts.add(productsList.get(i));
         }
     }
-    public Vector<Product> getShopProducts(){
+    public List<Product> getShopProducts(){
         return cartProducts;
     }
 
-    private Vector<Product> savedProducts;
-    public void setSavedProducts(Vector<Product> productsVec){
-        for(int i = 0; i < productsVec.size(); i++){
-            savedProducts.addElement(productsVec[i]);
+    private List<Product> savedProducts;
+    public void setSavedProducts(List<Product> productsList){
+        for(int i = 0; i < productsList.size(); i++){
+            savedProducts.add(productsList.get(i));
         }
     }
-    public Vector<Product> getSavedProducts(){
+    public List<Product> getSavedProducts(){
         return savedProducts;
     }
 
@@ -45,17 +46,17 @@ public class ShoppingTransition implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel destination, int flags) {
-        destination.writeArray(this.cartProducts);
-        destination.writeArray(this.savedProducts);
+        destination.writeList(this.cartProducts);
+        destination.writeList(this.savedProducts);
     }
 
     public ShoppingTransition(Parcel shoppingTransitionParcel) {
-        this.cartProducts = shoppingTransitionParcel.readArray();
-        this.savedProducts = shoppingTransitionParcel.readArray();
+        shoppingTransitionParcel.readList(cartProducts, Object.class.getClassLoader());
+        shoppingTransitionParcel.readList(savedProducts, Object.class.getClassLoader());
     }
 
     public ShoppingTransition(Product product) {
-        cartProducts.addElement(product);
+        cartProducts.add(product);
     }
 
     public ShoppingTransition() {

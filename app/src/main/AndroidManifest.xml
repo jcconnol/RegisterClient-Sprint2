@@ -38,7 +38,15 @@
             android:name=".CreateEmployeeActivity"
             android:label="@string/title_activity_create_employee"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ShoppingCart"></activity>
+        <activity android:name=".ShoppingCart" />
+        <activity
+            android:name=".ProductSalesReport"
+            android:label="@string/title_activity_product_sales_report"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CashierSalesReport"
+            android:label="@string/title_activity_cashier_sales_report"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import edu.uark.uarkregisterapp.models.transition.EmployeeTransition;
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void beginTransactionButtonOnClick(View view) {
-        this.displayFunctionalityNotAvailableDialog();
+        //this.displayFunctionalityNotAvailableDialog();
+
+        this.startActivity(new Intent(getApplicationContext(), ProductsListingActivity.class));
     }
 
     public void productSalesReportButtonOnClick(View view) {
@@ -45,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createEmployeeButtonOnClick(View view) {
-        this.displayFunctionalityNotAvailableDialog();
+        //this.displayFunctionalityNotAvailableDialog();
+
+        this.startActivity(new Intent(getApplicationContext(), CreateEmployeeActivity.class));
+
     }
 
     public void logOutButtonOnClick(View view) {

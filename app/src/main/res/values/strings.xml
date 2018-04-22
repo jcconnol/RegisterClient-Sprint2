@@ -72,4 +72,6 @@
     <string name="save_for_later">Save For Later</string>
     <string name="move_to_cart">Move To Cart</string>
     <string name="num_of_products">1</string>
+    <string name="title_activity_product_sales_report">ProductSalesReport</string>
+    <string name="title_activity_cashier_sales_report">CashierSalesReport</string>
 </resources>

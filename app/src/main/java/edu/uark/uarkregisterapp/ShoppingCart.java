@@ -1,6 +1,5 @@
 package edu.uark.uarkregisterapp;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,29 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.Vector;
+import org.apache.commons.lang3.ObjectUtils;
 
-import edu.uark.uarkregisterapp.adapters.ProductListAdapter;
+import java.util.List;
+
 import edu.uark.uarkregisterapp.adapters.SavedCartListAdapter;
 import edu.uark.uarkregisterapp.adapters.ShoppingCartListAdapter;
 import edu.uark.uarkregisterapp.models.api.ApiResponse;
-import edu.uark.uarkregisterapp.models.api.Employee;
 import edu.uark.uarkregisterapp.models.api.Product;
-import edu.uark.uarkregisterapp.models.api.services.EmployeeService;
 import edu.uark.uarkregisterapp.models.api.services.ProductService;
-import edu.uark.uarkregisterapp.models.transition.EmployeeTransition;
 import edu.uark.uarkregisterapp.models.transition.ShoppingTransition;
 
 public class ShoppingCart extends AppCompatActivity {
@@ -49,31 +38,32 @@ public class ShoppingCart extends AppCompatActivity {
         setContentView(R.layout.activity_shopping_cart);
 
         intent = getIntent();
-        shoppingTransition = intent.getParcelableExtra("ShoppingTransition");
-        shoppingCartList = shoppingTransition.getShopProducts();
-        saveForLaterList = shoppingTransition.getSavedProducts();
+        if(intent.getExtras() != null) {
+            shoppingTransition = intent.getParcelableExtra("ShoppingTransition");
+            shoppingCartList = shoppingTransition.getShopProducts();
+            saveForLaterList = shoppingTransition.getSavedProducts();
 
-        ListView cartListView = findViewById(R.id.shopping_cart_list);
-        ListView savedListView = findViewById(R.id.saved_items_list);
+            ListView cartListView = findViewById(R.id.shopping_cart_list);
+            ListView savedListView = findViewById(R.id.saved_items_list);
 
-        cartArrayAdapter = new ShoppingCartListAdapter(this, this.shoppingCartList);
-        savedArrayAdapter = new SavedCartListAdapter(this, this.saveForLaterList);
+            cartArrayAdapter = new ShoppingCartListAdapter(this, this.shoppingCartList);
+            savedArrayAdapter = new SavedCartListAdapter(this, this.saveForLaterList);
 
-        if(!shoppingCartList.isEmpty()){
-            TextView num_in_cart = findViewById(R.id.number_in_cart);
+            if(!shoppingCartList.isEmpty()){
+                TextView num_in_cart = findViewById(R.id.number_in_cart);
 
-            num_in_cart.setText(String.valueOf(shoppingCartList.size()));
+                num_in_cart.setText(String.valueOf(shoppingCartList.size()));
 
-            setCartEmptyHidden();
-            cartListView.setAdapter(cartArrayAdapter);
+                setCartEmptyHidden();
+                cartListView.setAdapter(cartArrayAdapter);
+            }
+
+            if(!saveForLaterList.isEmpty()){
+                setSaveForLaterEmptyHidden();
+                savedListView.setAdapter(savedArrayAdapter);
+            }
         }
 
-        if(!saveForLaterList.isEmpty()){
-
-            setSaveForLaterEmptyHidden();
-
-            savedListView.setAdapter(savedArrayAdapter);
-        }
     }
 
     public void purchaseOnClick(){
@@ -141,7 +131,7 @@ public class ShoppingCart extends AppCompatActivity {
         @Override
         protected void onPostExecute(ApiResponse<List<Product>> apiResponse) {
             if (apiResponse.isValidResponse()) {
-                cartArrayAdapter.notifyDataSetChanged();
+                //cartArrayAdapter.notifyDataSetChanged();
             }
 
             this.purchaseProductAlert.dismiss();

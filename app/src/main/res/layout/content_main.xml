@@ -14,12 +14,12 @@
     tools:context="edu.uark.uarkregisterapp.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:id="@+id/text_view_employee_welcome"
-        android:textSize="25sp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+<TextView
+    android:id="@+id/text_view_employee_welcome"
+    android:textSize="25sp"
+    android:layout_centerHorizontal="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/button_begin_transaction"

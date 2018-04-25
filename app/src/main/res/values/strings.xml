@@ -74,5 +74,4 @@
     <string name="num_of_products">1</string>
     <string name="title_activity_product_sales_report">ProductSalesReport</string>
     <string name="title_activity_cashier_sales_report">CashierSalesReport</string>
-    <string name="create_new_employee">Create New Employee</string>
 </resources>

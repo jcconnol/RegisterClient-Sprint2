@@ -30,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void shoppingCartOnClick(View view){
-        Intent intent = new Intent(getApplicationContext(), ShoppingCart.class);
-        //intent.putExtra("ShoppingTransition");
-        this.startActivity(intent);
+        this.startActivity(new Intent(getApplicationContext(), ShoppingCart.class));
     }
 
     public void beginTransactionButtonOnClick(View view) {

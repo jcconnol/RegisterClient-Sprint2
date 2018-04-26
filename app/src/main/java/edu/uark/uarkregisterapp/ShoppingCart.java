@@ -49,18 +49,19 @@ public class ShoppingCart extends AppCompatActivity {
         setContentView(R.layout.activity_shopping_cart);
 
         intent = getIntent();
-        shoppingTransition = intent.getParcelableExtra("ShoppingTransition");
-        shoppingCartList = shoppingTransition.getShopProducts();
-        saveForLaterList = shoppingTransition.getSavedProducts();
+        if(intent.getExtras() != null) {
+            shoppingTransition = intent.getParcelableExtra("ShoppingTransition");
+            shoppingCartList = shoppingTransition.getShopProducts();
+            saveForLaterList = shoppingTransition.getSavedProducts();
 
-        ListView cartListView = findViewById(R.id.shopping_cart_list);
-        ListView savedListView = findViewById(R.id.saved_items_list);
+            ListView cartListView = findViewById(R.id.shopping_cart_list);
+            ListView savedListView = findViewById(R.id.saved_items_list);
 
-        cartArrayAdapter = new ShoppingCartListAdapter(this, this.shoppingCartList);
-        savedArrayAdapter = new SavedCartListAdapter(this, this.saveForLaterList);
+            cartArrayAdapter = new ShoppingCartListAdapter(this, this.shoppingCartList);
+            savedArrayAdapter = new SavedCartListAdapter(this, this.saveForLaterList);
 
-        if(!shoppingCartList.isEmpty()){
-            TextView num_in_cart = findViewById(R.id.number_in_cart);
+            if (!shoppingCartList.isEmpty()) {
+                TextView num_in_cart = findViewById(R.id.number_in_cart);
 
                 setCartEmptyHidden();
                 cartListView.setAdapter(cartArrayAdapter);
@@ -69,10 +70,11 @@ public class ShoppingCart extends AppCompatActivity {
                 //populateShoppingCartList();
             }
 
-        if(!saveForLaterList.isEmpty()){
-            setSaveForLaterEmptyHidden();
-            //populateSavedList();
-            savedListView.setAdapter(savedArrayAdapter);
+            if (!saveForLaterList.isEmpty()) {
+                setSaveForLaterEmptyHidden();
+                //populateSavedList();
+                savedListView.setAdapter(savedArrayAdapter);
+            }
         }
     }
 

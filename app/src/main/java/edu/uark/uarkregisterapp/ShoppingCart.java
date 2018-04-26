@@ -56,6 +56,11 @@ public class ShoppingCart extends AppCompatActivity {
 
                 setCartEmptyHidden();
                 cartListView.setAdapter(cartArrayAdapter);
+
+                //TODO SET SAVED STUFF TEXTVIEW BELOW LIST, POPULATE LIST
+                populateSavedList();
+                populateShoppingCartList();
+
             }
 
             if(!saveForLaterList.isEmpty()){
@@ -63,7 +68,6 @@ public class ShoppingCart extends AppCompatActivity {
                 savedListView.setAdapter(savedArrayAdapter);
             }
         }
-
     }
 
     public void purchaseOnClick(){

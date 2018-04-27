@@ -27,7 +27,7 @@ public class ProductViewActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_product_page);
+		setContentView(R.layout.activity_product_view);
 		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
 		ActionBar actionBar = this.getSupportActionBar();

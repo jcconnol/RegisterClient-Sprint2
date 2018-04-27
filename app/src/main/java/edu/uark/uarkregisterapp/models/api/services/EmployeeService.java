@@ -1,13 +1,20 @@
 package edu.uark.uarkregisterapp.models.api.services;
 
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import edu.uark.uarkregisterapp.models.api.ActiveEmployeeCounts;
 import edu.uark.uarkregisterapp.models.api.ApiResponse;
 import edu.uark.uarkregisterapp.models.api.Employee;
 import edu.uark.uarkregisterapp.models.api.EmployeeLogin;
+import edu.uark.uarkregisterapp.models.api.Product;
 import edu.uark.uarkregisterapp.models.api.enums.ApiObject;
 import edu.uark.uarkregisterapp.models.api.enums.EmployeeApiMethod;
 import edu.uark.uarkregisterapp.models.api.enums.EmployeeClassification;
@@ -32,6 +39,30 @@ public class EmployeeService extends BaseRemoteService {
                 )
             )
         );
+    }
+
+    public ApiResponse<List<Employee>> getEmployees() {
+        ApiResponse<List<Employee>> apiResponse = this.performGetRequest(
+                this.buildPath()
+        );
+
+        JSONArray rawJsonArray = this.rawResponseToJSONArray(apiResponse.getRawResponse());
+        if (rawJsonArray != null) {
+            ArrayList<Employee> employees = new ArrayList<>(rawJsonArray.length());
+            for (int i = 0; i < rawJsonArray.length(); i++) {
+                try {
+                    employees.add((new Employee()).loadFromJson(rawJsonArray.getJSONObject(i)));
+                } catch (JSONException e) {
+                    Log.d("GET EMPLOYEE", e.getMessage());
+                }
+            }
+
+            apiResponse.setData(employees);
+        } else {
+            apiResponse.setData(new ArrayList<Employee>(0));
+        }
+
+        return apiResponse;
     }
 
     public ApiResponse<Employee> updateEmployee(Employee employee) {

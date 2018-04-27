@@ -75,4 +75,5 @@
     <string name="title_activity_product_sales_report">Product Sales Report</string>
     <string name="title_activity_cashier_sales_report">Cashier Sales Report</string>
     <string name="product_sales_by_number_sold">Top Products By Number of Sales</string>
+    <string name="employee_sales_by_number_sold">Top Employees By Number of Sales</string>
 </resources>

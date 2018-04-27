@@ -1,6 +1,5 @@
 package edu.uark.uarkregisterapp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;

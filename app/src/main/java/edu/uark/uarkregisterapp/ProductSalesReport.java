@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.uark.uarkregisterapp.adapters.ProductListAdapter;
@@ -56,6 +58,16 @@ public class ProductSalesReport extends AppCompatActivity {
             if (apiResponse.isValidResponse()) {
                 products.clear();
                 products.addAll(apiResponse.getData());
+
+                Collections.sort(
+                        products,
+                        new Comparator<Product>() {
+                            @Override
+                            public int compare(Product product1, Product product2) {
+                                return product2.compareTo(product1);
+                            }
+                        }
+                );
             }
 
             return apiResponse;

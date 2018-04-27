@@ -90,6 +90,18 @@ public class Product implements ConvertToJsonInterface, LoadFromJsonInterface<Pr
 		return jsonObject;
 	}
 
+	public int compareTo(Product product1){
+		if(this.getCount() > product1.getCount()){
+			return 1;
+		}
+		else if(this.getCount() < product1.getCount()){
+			return -1;
+		}
+		else{
+			return 0;
+		}
+	}
+
 	public Product() {
 		this.count = -1;
 		this.lookupCode = "";

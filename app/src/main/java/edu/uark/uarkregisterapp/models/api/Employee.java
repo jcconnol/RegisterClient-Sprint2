@@ -61,6 +61,15 @@ public class Employee implements ConvertToJsonInterface, LoadFromJsonInterface<E
         return this;
     }
 
+    private int sales;
+    public int getSales() {
+        return this.sales;
+    }
+    public Employee setSales(int sales) {
+        this.sales = sales;
+        return this;
+    }
+
     private boolean active;
     public boolean getActive() {
         return this.active;
@@ -95,6 +104,18 @@ public class Employee implements ConvertToJsonInterface, LoadFromJsonInterface<E
     public Employee setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
         return this;
+    }
+
+    public int compareTo(Employee employee1){
+        if(this.getSales() > employee1.getSales()){
+            return 1;
+        }
+        else if(this.getSales() < employee1.getSales()){
+            return -1;
+        }
+        else{
+            return 0;
+        }
     }
 
     @Override

@@ -16,6 +16,7 @@ public class EmployeeLogin implements ConvertToJsonInterface {
         this.employeeId = employeeId;
         return this;
     }
+
     private String password;
     public String getPassword() {
         return this.password;

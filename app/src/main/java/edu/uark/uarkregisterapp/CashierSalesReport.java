@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.uark.uarkregisterapp.adapters.EmployeeListAdapter;
@@ -28,19 +30,15 @@ public class CashierSalesReport extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashier_sales_report);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         this.employees = new ArrayList<>();
         this.employeeListAdapter = new EmployeeListAdapter(this, this.employees);
         this.getEmployeeListView().setAdapter(this.employeeListAdapter);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         (new CashierSalesReport.RetrieveEmployeeTask()).execute();
     }
 
@@ -61,6 +59,18 @@ public class CashierSalesReport extends AppCompatActivity {
             if (apiResponse.isValidResponse()) {
                 employees.clear();
                 employees.addAll(apiResponse.getData());
+
+                Collections.sort(
+                        employees,
+                        new Comparator<Employee>() {
+                            @Override
+                            public int compare(Employee employee1, Employee employee2) {
+                                return employee2.compareTo(employee1);
+                            }
+                        }
+                );
+
+
             }
 
             return apiResponse;
@@ -88,18 +98,15 @@ public class CashierSalesReport extends AppCompatActivity {
                         create().
                         show();
             }
-
-            //TODO SORT LIST BY NUMBER OF SALES
-
         }
-
-        private AlertDialog loadingProductsAlert;
 
         private RetrieveEmployeeTask() {
             this.loadingProductsAlert = new AlertDialog.Builder(CashierSalesReport.this).
                     setMessage(R.string.alert_dialog_products_loading).
                     create();
         }
+
+        private AlertDialog loadingProductsAlert;
     }
 
     private List<Employee> employees;

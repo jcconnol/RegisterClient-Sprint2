@@ -9,6 +9,7 @@ public enum EmployeeFieldName implements FieldNameInterface {
     LAST_NAME("lastName"),
     PASSWORD("password"),
     ACTIVE("active"),
+    SALES("sales"),
     CLASSIFICATION("classification"),
     MANAGER_ID("managerId"),
     CREATED_ON("createdOn");

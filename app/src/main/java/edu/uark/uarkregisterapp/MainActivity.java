@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.uark.uarkregisterapp.models.transition.EmployeeTransition;
+import edu.uark.uarkregisterapp.models.transition.ShoppingTransition;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -30,13 +31,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void shoppingCartOnClick(View view){
-        this.startActivity(new Intent(getApplicationContext(), ShoppingCart.class));
+        Intent intent = new Intent(getApplicationContext(), ShoppingCart.class);
+        //intent.putExtra("ShoppingTransition");
+        this.startActivity(intent);
     }
 
     public void beginTransactionButtonOnClick(View view) {
-        //this.displayFunctionalityNotAvailableDialog();
-
-        this.startActivity(new Intent(getApplicationContext(), ProductsListingActivity.class));
+        Intent intent = new Intent(getApplicationContext(), ProductsListingActivity.class);
+        //ShoppingTransition shoppingTransition = intent.getParcelableExtra("ShoppingTransition");
+        intent.putExtra("ShoppingTransition", intent.getParcelableExtra("ShoppingTransition"));
+        this.startActivity(intent);
     }
 
     public void productSalesReportButtonOnClick(View view) {

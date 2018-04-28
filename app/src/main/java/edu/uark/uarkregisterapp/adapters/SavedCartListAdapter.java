@@ -2,6 +2,7 @@ package edu.uark.uarkregisterapp.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import edu.uark.uarkregisterapp.R;
 import edu.uark.uarkregisterapp.models.api.Product;
 
 public class SavedCartListAdapter extends ArrayAdapter<Product> {
+
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
@@ -26,12 +28,12 @@ public class SavedCartListAdapter extends ArrayAdapter<Product> {
 
         Product product = this.getItem(position);
         if (product != null) {
-            TextView lookupCodeTextView = (TextView) view.findViewById(R.id.shopping_list_view_item_product_lookup_code);
+            TextView lookupCodeTextView = (TextView) view.findViewById(R.id.saved_list_view_item_product_name);
             if (lookupCodeTextView != null) {
                 lookupCodeTextView.setText(product.getLookupCode());
             }
 
-            TextView countTextView = (TextView) view.findViewById(R.id.shopping_cart_item_product_count);
+            TextView countTextView = (TextView) view.findViewById(R.id.saved_cart_item_qty_num);
             if (countTextView != null) {
                 countTextView.setText(String.format(Locale.getDefault(), "%d", 1));
             }
@@ -41,7 +43,7 @@ public class SavedCartListAdapter extends ArrayAdapter<Product> {
     }
 
     public SavedCartListAdapter(Context context, List<Product> products) {
-        super(context, R.layout.shopping_saved_item_list, products);
+        super(context, R.layout.shopping_cart_item_list, products);
     }
 
 }

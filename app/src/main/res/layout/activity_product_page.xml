@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.uark.uarkregisterapp.ProductViewActivity">
+    tools:context="edu.uark.uarkregisterapp.ProductListingPAGE">
 
     <TextView
         android:id="@+id/text_view_title"
@@ -79,15 +79,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.002" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+    <ListView
+        android:id="@+id/product_page_list_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_title"
-        app:layout_constraintGuide_begin="201dp"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package edu.uark.uarkregisterapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.uark.uarkregisterapp.adapters.ProductFindingAdapter;
 import edu.uark.uarkregisterapp.adapters.ProductListAdapter;
 import edu.uark.uarkregisterapp.models.api.ApiResponse;
 import edu.uark.uarkregisterapp.models.api.Product;
@@ -33,9 +35,9 @@ public class ProductListingPAGE extends AppCompatActivity {
         }
 
         this.products = new ArrayList<>();
-        this.productListAdapter = new ProductListAdapter(this, this.products);
+        this.productFindingAdapter = new ProductFindingAdapter(this, this.products);
 
-        this.getProductsListView().setAdapter(this.productListAdapter);
+        this.getProductsListView().setAdapter(this.productFindingAdapter);
         this.getProductsListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -59,7 +61,7 @@ public class ProductListingPAGE extends AppCompatActivity {
     }
 
     private ListView getProductsListView() {
-        return (ListView) this.findViewById(R.id.list_view_products);
+        return (ListView) this.findViewById(R.id.product_page_list_view);
     }
 
     private class RetrieveProductsTask extends AsyncTask<Void, Void, ApiResponse<List<Product>>> {
@@ -83,38 +85,36 @@ public class ProductListingPAGE extends AppCompatActivity {
         @Override
         protected void onPostExecute(ApiResponse<List<Product>> apiResponse) {
             if (apiResponse.isValidResponse()) {
-                productListAdapter.notifyDataSetChanged();
+                productFindingAdapter.notifyDataSetChanged();
             }
 
             this.loadingProductsAlert.dismiss();
 
-            /*if (!apiResponse.isValidResponse()) {
-                new AlertDialog.Builder(ProductsListingPAGE.this).
-                        setMessage(R.string.alert_dialog_products_load_failure).
-                        setPositiveButton(
-                                R.string.button_dismiss,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.dismiss();
-                                    }
+            if (!apiResponse.isValidResponse()) new AlertDialog.Builder(ProductListingPAGE.this).
+                    setMessage(R.string.alert_dialog_products_load_failure).
+                    setPositiveButton(
+                            R.string.button_dismiss,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
                                 }
-                        ).
-                        create().
-                        show();
-            }*/
+                            }
+                    ).
+                    create().
+                    show();
         }
 
         private AlertDialog loadingProductsAlert;
 
-      /*  private RetrieveProductsTask() {
-            this.loadingProductsAlert = new AlertDialog.Builder(ProductsListingPAGE.this).
+        private RetrieveProductsTask() {
+            this.loadingProductsAlert = new AlertDialog.Builder(ProductListingPAGE.this).
                     setMessage(R.string.alert_dialog_products_loading).
                     create();
-        }*/
+        }
     }
 
     private List<Product> products;
-    private ProductListAdapter productListAdapter;
+    private ProductFindingAdapter productFindingAdapter;
 
 
 

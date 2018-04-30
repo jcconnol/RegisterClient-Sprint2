@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProductsListingActivity"
+            android:name="ProductListingPAGE"
             android:label="@string/title_activity_products_listing"
             android:parentActivityName=".LandingActivity"
             android:theme="@style/AppTheme.NoActionBar">

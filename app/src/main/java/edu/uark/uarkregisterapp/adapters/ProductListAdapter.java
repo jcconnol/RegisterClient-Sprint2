@@ -22,6 +22,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 		if (view == null) {
 			LayoutInflater inflater = LayoutInflater.from(this.getContext());
 			view = inflater.inflate(R.layout.list_view_item_product, parent, false);
+			//view = inflater.inflate(R.layout.activity_product_page, parent, false);
 		}
 
 		Product product = this.getItem(position);

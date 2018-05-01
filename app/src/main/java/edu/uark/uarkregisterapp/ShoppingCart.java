@@ -95,23 +95,26 @@ public class ShoppingCart extends AppCompatActivity {
         }
     }
 
-    public void deleteFromCart(Product elem){
+    public void deleteFromCart(View view){
+        Product elem = (new Product()).setLookupCode(view.getTag().toString());
         shoppingCartList.remove(elem);
-        shoppingCartList.notify();
+        cartArrayAdapter.notifyDataSetChanged();
     }
 
-    public void saveForLater(Product elem){
+    public void saveForLater(View view){
+        Product elem = (new Product()).setLookupCode(view.getTag().toString());
         int found = cartArrayAdapter.getPosition(elem);
         saveForLaterList.add(shoppingCartList.get(found));
-        saveForLaterList.notify();
-        shoppingCartList.notify();
+        cartArrayAdapter.notifyDataSetChanged();
+        savedArrayAdapter.notifyDataSetChanged();
     }
 
-    public void moveToCart(Product elem){
+    public void moveToCart(View view){
+        Product elem = (new Product()).setLookupCode(view.getTag().toString());
         int found = savedArrayAdapter.getPosition(elem);
         shoppingCartList.add(saveForLaterList.get(found));
-        shoppingCartList.notify();
-        saveForLaterList.notify();
+        cartArrayAdapter.notifyDataSetChanged();
+        savedArrayAdapter.notifyDataSetChanged();
     }
 
     private void populateShoppingCartList() {

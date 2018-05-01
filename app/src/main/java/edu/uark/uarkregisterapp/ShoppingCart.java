@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ import edu.uark.uarkregisterapp.adapters.ShoppingCartListAdapter;
 import edu.uark.uarkregisterapp.models.api.ApiResponse;
 import edu.uark.uarkregisterapp.models.api.Employee;
 import edu.uark.uarkregisterapp.models.api.Product;
+import edu.uark.uarkregisterapp.models.api.enums.EmployeeClassification;
 import edu.uark.uarkregisterapp.models.api.services.EmployeeService;
 import edu.uark.uarkregisterapp.models.api.services.ProductService;
 import edu.uark.uarkregisterapp.models.transition.EmployeeTransition;
@@ -54,7 +56,7 @@ public class ShoppingCart extends AppCompatActivity {
         this.shoppingCartList = new ArrayList<>();
         this.saveForLaterList = new ArrayList<>();
 
-       // if(intent.getExtras() != null) {
+        //if(intent.getExtras() != null) {
             //shoppingTransition = intent.getParcelableExtra("ShoppingTransition");
             //shoppingCartList = shoppingTransition.getShopProducts();
             //saveForLaterList = shoppingTransition.getSavedProducts();
@@ -66,10 +68,10 @@ public class ShoppingCart extends AppCompatActivity {
             holder.setLookupCode("whatever");
 
             shoppingCartList.add(holder);
-            shoppingCartList.add(holder);
+            //shoppingCartList.add(holder);
 
             saveForLaterList.add(holder);
-            saveForLaterList.add(holder);
+            //saveForLaterList.add(holder);
 
             cartArrayAdapter = new ShoppingCartListAdapter(this, this.shoppingCartList);
             savedArrayAdapter = new SavedCartListAdapter(this, this.saveForLaterList);
@@ -86,9 +88,11 @@ public class ShoppingCart extends AppCompatActivity {
         //}
     }
 
-    public void purchaseOnClick(){
+    public void purchaseOnClick(View view){
         super.onResume();
-        (new ShoppingCart.PurchaseProductTask()).execute();
+        for(int i = 0; i < shoppingCartList.size(); i++) {
+            (new ShoppingCart.PurchaseProductTask()).execute();
+        }
     }
 
     public void deleteFromCart(Product elem){
@@ -126,29 +130,27 @@ public class ShoppingCart extends AppCompatActivity {
         savedArrayAdapter.notifyDataSetChanged();
     }
 
-    private class PurchaseProductTask extends AsyncTask<Void, Void, ApiResponse<List<Product>>> {
+    private class PurchaseProductTask extends AsyncTask<Product, Void, ApiResponse<Product>> {
         @Override
         protected void onPreExecute() {
             this.purchaseProductAlert = new AlertDialog.Builder(ShoppingCart.this)
-                    .setMessage(R.string.alert_dialog_employee_create)
+                    .setMessage(R.string.alert_dialog_product_create)
                     .create();
             this.purchaseProductAlert.show();
         }
 
         @Override
-        protected ApiResponse<List<Product>> doInBackground(Void... params) {
-            ApiResponse<List<Product>> apiResponse = (new ProductService()).getProducts();
-
-            if (apiResponse.isValidResponse()) {
-                shoppingCartList.clear();
-                shoppingCartList.addAll(apiResponse.getData());
+        protected ApiResponse<Product> doInBackground(Product... product) {
+            if (product.length > 0) {
+                return (new ProductService()).createProduct(product[0]);
+            } else {
+                return (new ApiResponse<Product>())
+                        .setValidResponse(false);
             }
-
-            return apiResponse;
         }
 
         @Override
-        protected void onPostExecute(ApiResponse<List<Product>> apiResponse) {
+        protected void onPostExecute(ApiResponse<Product> apiResponse) {
             if (apiResponse.isValidResponse()) {
                 cartArrayAdapter.notifyDataSetChanged();
             }
@@ -172,6 +174,14 @@ public class ShoppingCart extends AppCompatActivity {
         }
 
         private AlertDialog purchaseProductAlert;
+    }
+
+    private EditText getLookUpCodeTextView() {
+        return (EditText) this.findViewById(R.id.shopping_list_view_item_product_name);
+    }
+
+    private EditText getCountTextView() {
+        return (EditText) this.findViewById(R.id.shopping_cart_item_qty_num);
     }
 
     private ListView getProductsListView() {

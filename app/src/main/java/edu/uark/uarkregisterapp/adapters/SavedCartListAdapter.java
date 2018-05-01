@@ -43,7 +43,7 @@ public class SavedCartListAdapter extends ArrayAdapter<Product> {
     }
 
     public SavedCartListAdapter(Context context, List<Product> products) {
-        super(context, R.layout.shopping_cart_item_list, products);
+        super(context, R.layout.shopping_saved_item_list, products);
     }
 
 }

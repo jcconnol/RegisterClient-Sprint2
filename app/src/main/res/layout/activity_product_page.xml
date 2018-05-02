@@ -2,91 +2,41 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="edu.uark.uarkregisterapp.ProductListingPAGE">
 
-    <TextView
-        android:id="@+id/text_view_title"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="536dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="4dp"
-        android:text="Product Listing"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline" />
-
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="49dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toEndOf="@+id/searchView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_agenda" />
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="282dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="264dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/list_view_item_product_lookup_code"
-        android:layout_width="152dp"
-        android:layout_height="27dp"
-        android:layout_gravity="start"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="3"
-        android:text="@string/text_view_products_lookup_code"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181" />
-
-    <TextView
-        android:id="@+id/list_view_item_product_count"
-        android:layout_width="75dp"
-        android:layout_height="26dp"
-        android:layout_gravity="end"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="92dp"
-        android:layout_weight="3"
-        android:gravity="end"
-        android:text="@string/text_view_products_count"
+    <ListView
+        android:id="@+id/product_page_list_view"
+        android:layout_width="363dp"
+        android:layout_height="463dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toEndOf="@+id/list_view_item_product_lookup_code"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.002" />
-
-    <ListView
-        android:id="@+id/product_page_list_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>
